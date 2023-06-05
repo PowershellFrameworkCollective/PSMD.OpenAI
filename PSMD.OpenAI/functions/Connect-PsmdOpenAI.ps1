@@ -34,7 +34,7 @@
 	.EXAMPLE
 		PS C:\> Connect-PsmdOpenAI -Resource "resourcename" -Deployment "mydeployment" -ApiKey $key
 
-	Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
+		Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
 #>
 	[CmdletBinding(DefaultParameterSetName = 'User')]
 	param (
