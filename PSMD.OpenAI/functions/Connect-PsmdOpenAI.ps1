@@ -37,6 +37,7 @@
 		Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
 #>
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSReviewUnusedParameter", "")]
 	[CmdletBinding(DefaultParameterSetName = 'User')]
 	param (
 		[string]
