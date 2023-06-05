@@ -1,0 +1,22 @@
+﻿
+# ignore the settings folder and files for VSCode and PSS
+.vscode/*
+*.psproj
+*TempPoint*
+
+# Ignore staging info from Visual Studio
+library/PSMD.OpenAI/.vs/*
+library/PSMD.OpenAI/PSMD.OpenAI/bin/*
+library/PSMD.OpenAI/PSMD.OpenAI/obj/*
+
+# ignore PowerShell Studio MetaData
+PSMD.OpenAI/PSMD.OpenAI.psproj
+PSMD.OpenAI/PSMD.OpenAI.psproj.bak
+PSMD.OpenAI/PSMD.OpenAI.psprojs
+PSMD.OpenAI/PSMD.OpenAI.psproj
+
+# ignore the TestResults
+TestResults/*
+
+# ignore the publishing Directory
+publish/*

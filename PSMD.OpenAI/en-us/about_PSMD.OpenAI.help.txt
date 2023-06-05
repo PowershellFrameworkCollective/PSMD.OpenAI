@@ -1,0 +1,11 @@
+﻿TOPIC
+	about_PSMD.OpenAI
+	
+SHORT DESCRIPTION
+	Explains how to use the PSMD.OpenAI powershell module
+	
+LONG DESCRIPTION
+	<Insert Content here>
+
+KEYWORDS
+	PSMD.OpenAI
