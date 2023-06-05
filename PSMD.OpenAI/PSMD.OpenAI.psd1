@@ -18,7 +18,7 @@
 	Copyright = 'Copyright (c) 2023 Friedrich Weinmann'
 	
 	# Description of the functionality provided by this module
-	Description = 'Developer Tools utilizing AI'
+	Description = 'Developer Tools utilizing Azure Open AI'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
 	PowerShellVersion = '5.0'
@@ -27,7 +27,7 @@
 	# this module
 	RequiredModules = @(
 		@{ ModuleName='PSFramework'; ModuleVersion='1.7.270' }
-		@{ ModuleName='Refactor'; ModuleVersion='1.1.18' }
+		@{ ModuleName='Refactor'; ModuleVersion='1.2.24' }
 		@{ ModuleName='String'; ModuleVersion='1.1.3' }
 	)
 	

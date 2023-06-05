@@ -1,4 +1,23 @@
 ﻿function Invoke-OpenAIRequest {
+<#
+	.SYNOPSIS
+		Executes an OpenAI request.
+
+	.DESCRIPTION
+		Executes an OpenAI request.
+
+	.PARAMETER Body
+		The actual request payload to send.
+
+	.PARAMETER Type
+		The type of OpenAI request to invoke. 
+		Defaults to ’completions’.
+		
+	.EXAMPLE
+		PS C:\> Invoke-OpenAIRequest -Body @{ prompt = $prompt; max_tokens = 2000 }
+
+		Sends the query in $prompt, expecting no more than 2000 tokens in the response.
+#>
 	[CmdletBinding()]
 	param (
 		$Body,

@@ -1,16 +1,51 @@
 ﻿function Connect-PsmdOpenAI {
+<# 
+	.SYNOPSIS
+		Creates a connection to an OpenAI resource.
+
+	.DESCRIPTION
+		Creates a connection to an OpenAI resource.
+
+	.PARAMETER Resource
+		The resource name of the OpenAI resource.
+
+	.PARAMETER Deployment
+		The name of the specific deployment within the resource to use.
+
+	.PARAMETER ApiKey
+		The API key required for authentication.
+
+	.PARAMETER Identity
+		Use the current MSI account to connect to the OpenAI resource.
+		Not implemented yet.
+
+	.PARAMETER User
+		Connect as the current Azure User.
+		Not implemented yet.
+
+	.PARAMETER DynamicKey
+		While connecting as the current identity, use that access to dynamically retrieve the ApiKey and then continue using the ApiKey.
+		Not implemented yet.
+
+	.PARAMETER ApiVersion
+		The version of the API to use.
+		Default is 2022-12-01.
+
+	.EXAMPLE
+		PS C:\> Connect-PsmdOpenAI -Resource "resourcename" -Deployment "mydeployment" -ApiKey $key
+
+	Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
+#>
 	[CmdletBinding(DefaultParameterSetName = 'User')]
 	param (
-		[Parameter(Mandatory = $true)]
 		[string]
-		$Resource,
+		$Resource = (Get-PSFConfigValue -FullName 'PSMD.OpenAI.Default.Resource'),
 
 		[Parameter(Mandatory = $true)]
 		[string]
-		$Deployment,
+		$Deployment = (Get-PSFConfigValue -FullName 'PSMD.OpenAI.Default.Resource'),
 
 		[Parameter(ParameterSetName = 'Token')]
-		[string]
 		$ApiKey,
 
 		[Parameter(ParameterSetName = 'MSI')]
@@ -29,10 +64,17 @@
 		$ApiVersion = '2022-12-01'
 	)
 
+	begin {
+		if (-not $Resource) { Stop-PSFFunction -String 'Connect-PsmdOpenAI.NoResource' -EnableException $true -Cmdlet $PSCmdlet }
+		if (-not $Deployment) { Stop-PSFFunction -String 'Connect-PsmdOpenAI.NoDeployment' -EnableException $true -Cmdlet $PSCmdlet }
+	}
 	Process {
 		switch ($PSCmdlet.ParameterSetName) {
 			'Token' {
-				$script:token = New-Token -Resource $Resource -Deployment $Deployment -ApiKey $ApiKey -ApiVersion $ApiVersion
+				if ($ApiKey -is [securestring]) { $secret = $ApiKey }
+				elseif ($ApiKey -is [PSCredential]) { $secret = $ApiKey.Password}
+				else { $secret = $ApiKey | ConvertTo-SecureString -AsPlainText -Force }
+				$script:token = New-Token -Resource $Resource -Deployment $Deployment -ApiKey $secret -ApiVersion $ApiVersion
 			}
 			default {
 				throw "Not Implemented Yet"

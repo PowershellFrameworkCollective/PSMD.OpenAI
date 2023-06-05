@@ -1,4 +1,20 @@
 ﻿function Add-OaiHelp {
+<#
+.SYNOPSIS
+    Adds help to the provided function, if needed.
+
+.DESCRIPTION
+    Adds help to the provided function, if needed.
+	If the command already has ANY help, no action will be taken.
+
+.PARAMETER Component
+    Function definitions as parsed from the Read-ReAstComponent command.
+
+.EXAMPLE
+    PS C:\> Read-ReAstComponent -Path "C:\Temp\MyScript.ps1" -Select FunctionDefinitionAst | Add-OaiHelp | Write-ReAstComponent
+	
+	Reads all function definitions from 'C:\Temp\MyScript.ps1' and adds help to them if needed.
+#>
 	[CmdletBinding()]
 	param (
 		[Parameter(ValueFromPipeline = $true)]

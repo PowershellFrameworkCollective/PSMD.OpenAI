@@ -1,4 +1,24 @@
 ﻿function Resolve-FunctionCode {
+<#
+	.SYNOPSIS
+		Resolves the function code to send to OpenAI based on the provided PowerShell AST object
+
+	.DESCRIPTION
+		Resolves the function code to send to OpenAI based on the provided PowerShell AST object.
+		It ensures the total token count is below the limit given, truncating code parts as needed.
+
+	.PARAMETER Ast
+		The PowerShell AST object representing the function code.
+
+	.PARAMETER TokenLimit
+		The maximum token count to be allowed.
+		Defaults to: 3000
+
+	.EXAMPLE 
+		PS C:\> Resolve-FunctionCode -Ast $ast
+
+		Returns the text value of the function AST provided, as should be sent to OpenAI
+#>
 	[OutputType([string])]
 	[CmdletBinding()]
 	param (

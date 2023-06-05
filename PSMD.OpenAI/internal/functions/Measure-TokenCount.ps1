@@ -1,21 +1,18 @@
 ﻿function Measure-TokenCount {
 <#
-.SYNOPSIS
-Gets the total token count by calculating the average token length and dividing it by four.
+	.SYNOPSIS
+		Gets the total token count by calculating the average token length and dividing it by four.
 
-.DESCRIPTION
-The Measure-TokenCount function calculates the total token count of a string by dividing the length of the string by 4 and then rounding it.
+	.DESCRIPTION
+		The Measure-TokenCount function calculates the total token count of a string by dividing the length of the string by 4 and then rounding it.
 
-.PARAMETER Code
-The Code parameter is a mandatory string that is used to calculate the total token count of the given string.
+	.PARAMETER Code
+		The Code that is used to calculate the total token count of the given string.
 
-.OUTPUTS
-System.Int
+	.EXAMPLE
+		PS C:\> Measure-TokenCount -Code "Write-Host 'Hello, world!'"
 
-.EXAMPLE
-PS C:\> Measure-TokenCount -Code "Hello, world!"
-
-This command calculates the total token count of the string "Hello, world!".
+		This command calculates the total token count of the string "Write-Host 'Hello, world!'" (7).
 #>
 	[OutputType([int])]
 	[CmdletBinding()]
