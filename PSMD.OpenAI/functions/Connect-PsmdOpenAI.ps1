@@ -1,5 +1,5 @@
 ﻿function Connect-PsmdOpenAI {
-<# 
+<#
 	.SYNOPSIS
 		Creates a connection to an OpenAI resource.
 
@@ -34,8 +34,10 @@
 	.EXAMPLE
 		PS C:\> Connect-PsmdOpenAI -Resource "resourcename" -Deployment "mydeployment" -ApiKey $key
 
-	Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
+		Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
 #>
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSReviewUnusedParameter", "")]
 	[CmdletBinding(DefaultParameterSetName = 'User')]
 	param (
 		[string]

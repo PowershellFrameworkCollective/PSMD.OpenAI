@@ -1,10 +1,10 @@
 ﻿function Get-PsmdOaiHelp {
 <#
     .SYNOPSIS
-    	Get help from the OpenAI Service for given code or command. 
+    	Get help from the OpenAI Service for given code or command.
 
     .DESCRIPTION
-    	Get help from the OpenAI Service for given code or command. 
+    	Get help from the OpenAI Service for given code or command.
 
     .PARAMETER Command
     	The command for which help is being requested
@@ -12,7 +12,7 @@
     .PARAMETER Code
     	The code for which help is being requested
 
-    .EXAMPLE 
+    .EXAMPLE
     	PS C:\> Get-PsmdOaiHelp -Command mkdir
 
     	Gets the help for the mkdir command from the OpenAI service.

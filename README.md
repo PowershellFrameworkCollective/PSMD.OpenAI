@@ -1,31 +1,36 @@
-﻿# Description
+﻿# PSMD.OpenAI
 
-Insert a useful description for the PSMD.OpenAI project here.
+Welcome to the AI-Empowered code development toolkit of the PSFramework project.
+This project aims to provide assistance tools, using AI, to help accelerate coding.
 
-Remember, it's the first thing a visitor will see.
+## Installation
 
-# Project Setup Instructions
-## Working with the layout
+To install this module, run the following line in your console:
 
-- Don't touch the psm1 file
-- Place functions you export in `functions/` (can have subfolders)
-- Place private/internal functions invisible to the user in `internal/functions` (can have subfolders)
-- Don't add code directly to the `postimport.ps1` or `preimport.ps1`.
-  Those files are designed to import other files only.
-- When adding files & folders, make sure they are covered by either `postimport.ps1` or `preimport.ps1`.
-  This adds them to both the import and the build sequence.
+```powershell
+Install-Module PSMD.OpenAI -Scope CurrentUser
+```
 
-## Setting up CI/CD
+## Connect
 
-> To create a PR validation pipeline, set up tasks like this:
+To do anything, you first need to connect to an Azure OpenAI deployment:
 
-- Install Prerequisites (PowerShell Task; VSTS-Prerequisites.ps1)
-- Validate (PowerShell Task; VSTS-Validate.ps1)
-- Publish Test Results (Publish Test Results; NUnit format; Run no matter what)
+```powershell
+Connect-PsmdOpenAI -Resource "resourcename" -Deployment "mydeployment" -ApiKey $key
+```
 
-> To create a build/publish pipeline, set up tasks like this:
+The `$key` can be either a string, a securestring or a PSCredential object.
 
-- Install Prerequisites (PowerShell Task; VSTS-Prerequisites.ps1)
-- Validate (PowerShell Task; VSTS-Validate.ps1)
-- Build (PowerShell Task; VSTS-Build.ps1)
-- Publish Test Results (Publish Test Results; NUnit format; Run no matter what)
+> Other authentication options are planned for, but not yet implemented.
+
+## Profit
+
+> Adding help to your commands
+
+This will add help to all functions in all ps1 files in the current folder:
+
+```powershell
+Get-ChildItem -Recurse -File -Filter *.ps1 | Add-PsmdOaiFunctionHelp
+```
+
+Functions that already have existing help are not modified (even if the help is not complete yet).
