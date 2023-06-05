@@ -70,7 +70,7 @@
 	}
 	process {
 		foreach ($pathEntry in $Path) {
-			Invoke-PSFProtectedCommand -ActionString 'Add-PsmdOaiFunctionHelp.Path.Resolving' -Target $pathEntry -ScriptBlock {
+			Invoke-PSFProtectedCommand -ActionString 'Add-PsmdOaiFunctionHelp.Path.Resolving' -ActionStringValues $pathEntry -Target $pathEntry -ScriptBlock {
 				$resolvedPaths = Resolve-PSFPath -Path $pathEntry -Provider FileSystem
 			} -EnableException $EnableException -PSCmdlet $PSCmdlet -Continue
 

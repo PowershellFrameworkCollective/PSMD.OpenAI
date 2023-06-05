@@ -1,5 +1,5 @@
 ﻿function Connect-PsmdOpenAI {
-<# 
+<#
 	.SYNOPSIS
 		Creates a connection to an OpenAI resource.
 
@@ -36,6 +36,7 @@
 
 		Creates a connection to an Azure Cognitive Services OpenAI resource using an API key.
 #>
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
 	[CmdletBinding(DefaultParameterSetName = 'User')]
 	param (
 		[string]

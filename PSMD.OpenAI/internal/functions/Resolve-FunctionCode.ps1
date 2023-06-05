@@ -14,7 +14,7 @@
 		The maximum token count to be allowed.
 		Defaults to: 3000
 
-	.EXAMPLE 
+	.EXAMPLE
 		PS C:\> Resolve-FunctionCode -Ast $ast
 
 		Returns the text value of the function AST provided, as should be sent to OpenAI
@@ -79,7 +79,7 @@ $($Ast.Body.EndBlock.Statements.Extent.Text | Split-String "`n" | Set-String "^\
 	foreach ($case in $cases) {
 		if ((Measure-TokenCount -Code $case) -lt $TokenLimit) {
 			return $case | Set-String -OldValue '\s+' -NewValue ' '
-		}	
+		}
 	}
 
 	$lines = $processBlock -split "`n"

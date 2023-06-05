@@ -22,7 +22,7 @@
 		$Code
 	)
 
-	$Code -split "(?<=\s)" | ForEach-Object { 
+	$Code -split "(?<=\s)" | ForEach-Object {
 		$div = $_.Length / 4
 		$rounded = [math]::Round(($_.Length / 4), [System.MidpointRounding]::ToNegativeInfinity)
 		if ($div -gt $rounded) { $rounded + 1 }

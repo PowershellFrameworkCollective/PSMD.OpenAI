@@ -10,7 +10,7 @@
 		The actual request payload to send.
 
 	.PARAMETER Type
-		The type of OpenAI request to invoke. 
+		The type of OpenAI request to invoke.
 		Defaults to ’completions’.
 		
 	.EXAMPLE
