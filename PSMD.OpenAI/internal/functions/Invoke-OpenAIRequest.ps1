@@ -26,8 +26,12 @@
 		$Type = 'completions'
 	)
 
-	Assert-OpenAIConnection -Cmdlet $PSCmdlet
-
-	$url = 'https://{0}.openai.azure.com/openai/deployments/{1}/{2}?api-version={3}' -f $script:token.Resource, $script:token.Deployment, $Type, $script:token.ApiVersion
-	Invoke-RestMethod -Method 'Post' -Uri $url -Headers $script:token.GetHeader() -Body ($Body | ConvertTo-Json -Compress)
+	begin {
+		Assert-OpenAIConnection -Cmdlet $PSCmdlet
+	}
+	process {
+		$url = 'https://{0}.openai.azure.com/openai/deployments/{1}/{2}?api-version={3}' -f $script:token.Resource, $script:token.Deployment, $Type, $script:token.ApiVersion
+		try { Invoke-RestMethod -Method 'Post' -Uri $url -Headers $script:token.GetHeader() -Body ($Body | ConvertTo-Json -Compress) -ErrorAction Stop }
+		catch { throw }
+	}
 }

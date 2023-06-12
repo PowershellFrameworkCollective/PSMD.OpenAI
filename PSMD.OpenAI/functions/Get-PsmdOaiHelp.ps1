@@ -45,7 +45,11 @@ Write the help for the following PowerShell Function in the PowerShell Comment B
 	process {
 		if ($Code) {
 			$tokenCount = Measure-TokenCount -Code ($basePrompt -f $Code)
-			$help = Get-PsmdOaiCompletion -MaxTokens (4097 - $tokenCount - 200) -Prompt ($basePrompt -f $Code)
+			try { $help = Get-PsmdOaiCompletion -MaxTokens (4097 - $tokenCount - 200) -Prompt ($basePrompt -f $Code) -ErrorAction Stop }
+			catch {
+				$PSCmdlet.WriteError($_)
+				return
+			}
 			[PSCustomObject]@{
 				Command = ''
 				Code = $Code
@@ -61,7 +65,11 @@ $($commandObject.Definition)
 }
 "@
 				$tokenCount = Measure-TokenCount -Code ($basePrompt -f $commandText)
-				$help = Get-PsmdOaiCompletion -MaxTokens (4097 - $tokenCount - 200) -Prompt ($basePrompt -f $commandText)
+				try { $help = Get-PsmdOaiCompletion -MaxTokens (4097 - $tokenCount - 200) -Prompt ($basePrompt -f $commandText) -ErrorAction Stop }
+				catch {
+					$PSCmdlet.WriteError($_)
+					continue
+				}
 				[PSCustomObject]@{
 					Command = $commandObject.Name
 					Code = $Code
