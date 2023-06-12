@@ -43,10 +43,13 @@
 		Assert-OpenAIConnection -Cmdlet $PSCmdlet
 	}
 	process {
-		$results = Invoke-OpenAIRequest -Body @{
+		$body = @{
 			prompt     = $Prompt
 			max_tokens = $MaxTokens
 		}
+		try { $results = Invoke-OpenAIRequest -Body $body -ErrorAction Stop }
+		catch { throw }
+
 		if ($Raw) { return $results }
 		$results.choices.text
 	}

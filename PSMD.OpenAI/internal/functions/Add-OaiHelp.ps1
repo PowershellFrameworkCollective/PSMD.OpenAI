@@ -22,7 +22,7 @@
 		$Component
 	)
 	process {
-		foreach ($componentObject in $Component) {
+		:main foreach ($componentObject in $Component) {
 			if ($componentObject.Ast.GetHelpContent()) {
 				$componentObject
 				continue
@@ -31,8 +31,17 @@
 			$textToScan = Resolve-FunctionCode -Ast $componentObject.Ast
 			$attempt = 0
 			while ($attempt -lt 3) {
-				$helpResult = Get-PsmdOaiHelp -Code $textToScan
-				$newText = $componentObject.Text.SubString(0, $componentObject.Text.IndexOf("`n")), $helpResult.Help.Trim(), $componentObject.Text.SubString($componentObject.Text.IndexOf("`n")) -join ""
+				$helpResult = $null
+				try { $helpResult = Get-PsmdOaiHelp -Code $textToScan -ErrorAction Stop }
+				catch {
+					$PSCmdlet.WriteError($_)
+					$componentObject
+					continue main
+				}
+
+				if (-not $helpResult) { $attempt++; continue }
+				$insertIndex = $componentObject.Text.IndexOf("`n",$componentObject.Text.IndexOf("{"))
+				$newText = $componentObject.Text.SubString(0, $insertIndex), "`n", $helpResult.Help.Trim(), $componentObject.Text.SubString($insertIndex) -join ""
 				if (Test-ReSyntax -Code $newText) { break }
 				$attempt++
 			}

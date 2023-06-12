@@ -3,7 +3,7 @@
 	RootModule = 'PSMD.OpenAI.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0'
+	ModuleVersion = '1.0.1'
 	
 	# ID used to uniquely identify this module
 	GUID = '2d46a195-f59c-441c-a491-b257663e2bf6'
@@ -27,7 +27,7 @@
 	# this module
 	RequiredModules = @(
 		@{ ModuleName='PSFramework'; ModuleVersion='1.7.270' }
-		@{ ModuleName='Refactor'; ModuleVersion='1.2.24' }
+		@{ ModuleName='Refactor'; ModuleVersion='1.2.25' }
 		@{ ModuleName='String'; ModuleVersion='1.1.3' }
 	)
 	
